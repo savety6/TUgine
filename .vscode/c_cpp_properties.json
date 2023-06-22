@@ -4,8 +4,9 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/include/engine",
-                "${workspaceFolder}/libraries/**"
+                "${workspaceFolder}/include/*",
+                "${workspaceFolder}/libraries/**",
+                "${workspaceFolder}/include"
             ],
             "defines": [],
             "macFrameworkPath": [
