@@ -3,3 +3,4 @@ main/
 main.d*
 *.zip
 glfwBuild/
+glew-*/
