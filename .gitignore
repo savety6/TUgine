@@ -2,3 +2,4 @@ build/
 main/
 main.d*
 *.zip
+glfwBuild/
