@@ -1,11 +1,14 @@
 #include "Engine/Engine.hpp"
-
+#include "Object/GameObjectManager.hpp"
 
 #include <GL/glew.h> // GLEW includes
 #include <GLFW/glfw3.h> // GLFW includes
 
 Engine::Engine() : window(nullptr) {
     // Constructor
+
+    player = new GameObject();
+    gameObjectManager.Add(player);
 }
 
 Engine::~Engine() {
@@ -25,7 +28,7 @@ void Engine::Initialize() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
     // Create a windowed mode window and its OpenGL context
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(1280, 720, "Hello World", NULL, NULL);
     if (!window) {
         glfwTerminate();
         // Window or OpenGL context creation failed
@@ -58,6 +61,33 @@ void Engine::MainLoop() {
 
         // Poll for and process events
         glfwPollEvents();
+
+        // Update the game objects
+        gameObjectManager.UpdateAll(0.0f); // Replace 0.0f with a real delta time calculation later
+
+        // Input handling
+        if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
+            player->SetPosition(player->GetPositionX(), player->GetPositionY() + 0.01f); // Adjust the number for different speed
+        }
+        if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+            player->SetPosition(player->GetPositionX(), player->GetPositionY() - 0.01f);
+        }
+        if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
+            player->SetPosition(player->GetPositionX() - 0.01f, player->GetPositionY());
+        }
+        if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+            player->SetPosition(player->GetPositionX() + 0.01f, player->GetPositionY());
+        }
+
+        // Render game objects
+        gameObjectManager.RenderAll();
+
+        // Swap front and back buffers
+        glfwSwapBuffers(window);
+
+        // Poll for and process events
+        glfwPollEvents();
+    
     }
 
     glfwTerminate();
