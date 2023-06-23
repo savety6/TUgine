@@ -4,5 +4,8 @@
         "GLFW",
         "spdlog",
         "TUGINE"
-    ]
+    ],
+    "files.associations": {
+        "sstream": "cpp"
+    }
 }
