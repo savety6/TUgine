@@ -6,6 +6,9 @@
         "TUGINE"
     ],
     "files.associations": {
-        "sstream": "cpp"
-    }
+        "sstream": "cpp",
+        "iosfwd": "cpp",
+        "functional": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "enabled"
 }

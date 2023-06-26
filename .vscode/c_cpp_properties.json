@@ -6,7 +6,8 @@
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/include/*",
                 "${workspaceFolder}/libraries/**",
-                "${workspaceFolder}/include"
+                "${workspaceFolder}/include",
+                "/usr/local/Cellar/glfw/3.3.8/include"
             ],
             "defines": [],
             "macFrameworkPath": [
