@@ -47,6 +47,17 @@ void MacWindow::Init(const WindowProps& props)
 
     window = glfwCreateWindow((int)props.Width, (int)props.Height, data.Title.c_str(), nullptr, nullptr);
     glfwMakeContextCurrent(window);
+    
+    // Initialize GLEW
+    GLenum glewError = glewInit();
+    if (glewError != GLEW_OK) {
+        // Error initializing GLEW
+        const GLubyte* errorStr = glewGetErrorString(glewError);
+        TUG_CORE_ERROR("Error initializing GLEW");//TODO: show error message
+    }
+
+    TUG_CORE_INFO("Initializing GLEW ");
+
     glfwSetWindowUserPointer(window, &data);
     SetVSync(true);
 

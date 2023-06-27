@@ -17,16 +17,23 @@ add_subdirectory(libraries/spdlog)
 list(APPEND CMAKE_PREFIX_PATH "./libraries/spdlog/build")
 find_package(spdlog REQUIRED)
 
-
-# include directori for header files
+# include directories for header files
 include_directories(include)
-# include subdirectori for header files
+# include subdirectories for header files
 include_directories(include/tugine)
 include_directories(include/engine)
+include_directories(include/events)
 
+# ImGui
+include_directories(libraries/imgui)
+include_directories(libraries/imgui/backends) # Contains the implementation for GLFW and OpenGL
 
 # add all files in src/ to SOURCES
 file(GLOB_RECURSE SOURCES "src/*.cpp")
+
+# add ImGui files
+file(GLOB IMGUI_SOURCES "libraries/imgui/*.cpp" "libraries/imgui/*.h" "libraries/imgui/backends/imgui_impl_glfw.cpp" "libraries/imgui/backends/imgui_impl_opengl3.cpp")
+list(APPEND SOURCES ${IMGUI_SOURCES})
 
 # add all files in src/ to the executable
 add_executable(tugine ${SOURCES})

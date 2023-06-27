@@ -8,7 +8,8 @@
                 "${workspaceFolder}/libraries/**",
                 "${workspaceFolder}/include",
                 "/usr/local/Cellar/glfw/3.3.8/include",
-                "./include/engine"
+                "./include/engine",
+                "./include/events"
             ],
             "defines": [],
             "macFrameworkPath": [

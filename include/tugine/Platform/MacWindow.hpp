@@ -3,9 +3,9 @@
 
 #include <string>
 
-#include "../Window.hpp"
-
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include "../Window.hpp"
 
 class MacWindow : public Window
 {
