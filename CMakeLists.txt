@@ -20,6 +20,10 @@ find_package(spdlog REQUIRED)
 
 # include directori for header files
 include_directories(include)
+# include subdirectori for header files
+include_directories(include/tugine)
+include_directories(include/engine)
+
 
 # add all files in src/ to SOURCES
 file(GLOB_RECURSE SOURCES "src/*.cpp")
