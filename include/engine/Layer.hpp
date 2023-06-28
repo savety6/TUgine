@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Tugine/Core.hpp"
-#include "../Events/Event.hpp"
+#include "tugine/Core.hpp"
+#include "events/Event.hpp"
 
 #include <string>
 

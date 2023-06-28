@@ -3,9 +3,9 @@
 #define GLFW_INCLUDE_NONE // GLFW then includes only the barebones OpenGL headers
 
 #include "debug/Log.hpp"
-#include "Tugine/Window.hpp" 
-#include "Events/ApplicationEvent.hpp"
-#include "Engine/LayerStack.hpp"
+#include "tugine/Window.hpp" 
+#include "events/ApplicationEvent.hpp"
+#include "engine/LayerStack.hpp"
 #include <memory>
 
 class Engine {

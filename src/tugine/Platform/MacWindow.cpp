@@ -2,9 +2,9 @@
 #include "debug/Log.hpp"
 #include "tugine/Core.hpp"
 
-#include "Events/ApplicationEvent.hpp"
-#include "Events/MouseEvent.hpp"
-#include "Events/KeyEvent.hpp"
+#include "events/ApplicationEvent.hpp"
+#include "events/MouseEvent.hpp"
+#include "events/KeyEvent.hpp"
 
 
 static bool s_GLFWInitialized = false;

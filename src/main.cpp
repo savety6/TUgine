@@ -1,6 +1,6 @@
-#include "Engine/Engine.hpp"
+#include "engine/Engine.hpp"
 #include "debug/Log.hpp"
-#include "Events/ApplicationEvent.hpp"
+#include "events/ApplicationEvent.hpp"
 int main() {
     Engine engine;
     

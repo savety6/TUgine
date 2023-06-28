@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Tugine/Core.hpp"
+#include "tugine/Core.hpp"
 #include "Layer.hpp"
 
 #include <vector>

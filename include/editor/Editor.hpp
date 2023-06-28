@@ -3,17 +3,17 @@
 #include "engine/Layer.hpp"
 #include "events/Event.hpp"
 
-class Engine: public Layer  
+class Editor: public Layer  
 {
 public:
-    Engine();
-    ~Engine();
+    Editor();
+    ~Editor();
 
-    void OnAttach() override;
-    void OnDetach() override;
+    void OnAttach();
+    void OnDetach();
 
-    void OnUpdate() override;
-    void OnEvent(Event& event) override;
+    void OnUpdate();
+    void OnEvent(Event& event);
 
 private:
 

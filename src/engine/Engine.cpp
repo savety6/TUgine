@@ -1,4 +1,4 @@
-#include "Engine/Engine.hpp"
+#include "engine/Engine.hpp"
 
 
 #include <GL/glew.h> // GLEW includes

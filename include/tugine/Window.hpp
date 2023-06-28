@@ -3,8 +3,8 @@
 #include <string>
 #include <vector>
 
-#include "../Tugine/Core.hpp"
-#include "../Events/Event.hpp"
+#include "tugine/Core.hpp"
+#include "events/Event.hpp"
 
 struct WindowProps
 {

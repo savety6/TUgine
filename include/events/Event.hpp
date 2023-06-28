@@ -1,5 +1,5 @@
 #pragma once
-#include "../Tugine/Core.hpp"
+#include "tugine/Core.hpp"
 #include <string>
 #include <functional>
 

@@ -7,9 +7,13 @@
                 "${workspaceFolder}/include/*",
                 "${workspaceFolder}/libraries/**",
                 "${workspaceFolder}/include",
+                "${workspaceFolder}/include/editor",
                 "/usr/local/Cellar/glfw/3.3.8/include",
                 "./include/engine",
-                "./include/events"
+                "./include/events",
+                "./include/editor",
+                "./include/tugine",
+                "./include/tugine/Platform"
             ],
             "defines": [],
             "macFrameworkPath": [
@@ -17,7 +21,7 @@
             ],
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c17",
-            "cppStandard": "c++17",
+            "cppStandard": "c++20",
             "intelliSenseMode": "macos-clang-x64",
             "configurationProvider": "ms-vscode.cmake-tools"
         }
