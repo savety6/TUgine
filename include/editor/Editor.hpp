@@ -16,5 +16,5 @@ public:
     void OnEvent(Event& event);
 
 private:
-
+    float lastFrameTime = 0.0f;
 };

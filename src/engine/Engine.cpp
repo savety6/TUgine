@@ -4,13 +4,14 @@
 #include <GL/glew.h> // GLEW includes
 #include <GLFW/glfw3.h> // GLFW includes
 
-
-
 #define BIND_EVENT_FN(x) std::bind(&Engine::x, this, std::placeholders::_1)
+
+Engine* Engine::instance = nullptr;
 
 Engine::Engine() : window(nullptr) {
     // Constructor
-    
+    TUG_CORE_ASSERT(!instance, "Engine already exists!");
+    instance = this;
 }
 
 Engine::~Engine() {

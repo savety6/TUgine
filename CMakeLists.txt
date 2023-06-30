@@ -18,6 +18,7 @@ find_package(spdlog REQUIRED)
 include_directories(include)
 include_directories(include/tugine)
 include_directories(include/engine)
+include_directories(include/tugine/Platform/OpenGL)
 
 include_directories(libraries/glfw/include)
 
@@ -26,8 +27,8 @@ include_directories(libraries/imgui/backends)
 
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 
-list(APPEND SOURCES "libraries/imgui/backends/imgui_impl_glfw.cpp")
-list(APPEND SOURCES "libraries/imgui/backends/imgui_impl_opengl3.cpp")
+# list(APPEND SOURCES "libraries/imgui/backends/imgui_impl_glfw.cpp")
+# list(APPEND SOURCES "libraries/imgui/backends/imgui_impl_opengl3.cpp")
 
 file(GLOB IMGUI_SOURCES "libraries/imgui/*.cpp")
 list(APPEND SOURCES ${IMGUI_SOURCES})

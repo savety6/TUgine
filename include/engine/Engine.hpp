@@ -20,12 +20,21 @@ public:
     void OnEvent(Event& e);
 
     void PushLayer( Layer* layer );
-    void PushOverlay( Layer* layer ); 
+    void PushOverlay( Layer* layer );
+
+    inline static Engine& Get() { return *instance; }
+
+    inline Window& GetWindow() { return *window; }
 private:
     bool OnWindowClose(WindowCloseEvent& e);
+
+    
 
     std::unique_ptr<Window> window; 
     bool running = true; 
 
     LayerStack layerStack;
+
+private:
+    static Engine* instance;
 };
