@@ -5,6 +5,10 @@
 **.vcxproj.user
 **.vcxproj.filters
 
+# MacOS
+
+.DS_Store
+
 # Visual Studio Code
 .vscode
 
@@ -12,6 +16,6 @@
 /dependencies
 /dependencies*
 
-
 # Compiled Object and binarie files
 /build
+Makefile
