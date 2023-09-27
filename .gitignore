@@ -1,6 +1,17 @@
-build/
-main/
-main.d*
-*.zip
-glfwBuild/
-glew-*/
+# Visual Studio 
+/.vs
+**.sln
+**.vcxproj
+**.vcxproj.user
+**.vcxproj.filters
+
+# Visual Studio Code
+.vscode
+
+# Conan
+/dependencies
+/dependencies*
+
+
+# Compiled Object and binarie files
+/build

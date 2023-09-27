@@ -1,12 +1,8 @@
-#include "engine/Engine.hpp"
-#include "debug/Log.hpp"
-#include "events/ApplicationEvent.hpp"
-int main() {
-    Engine engine;
-    
-    engine.Initialize();
-    engine.MainLoop();
-    
+#include <iostream>
 
+#include <spdlog/spdlog.h>
+
+int main(){
+    spdlog::warn("sup bitch");
     return 0;
 }
