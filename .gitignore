@@ -1,0 +1,24 @@
+# Directories
+.vs/
+.vscode/
+bin/
+bin-int/
+temp/
+
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+*.userprefs
+*.ncb
+*.aps
+*.vspscc
+*.vssscc
+*.vshost.*
+*.[Cc]ache
+*.log
+
+
+# Files
+*.sln
