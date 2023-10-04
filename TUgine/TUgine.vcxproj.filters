@@ -4,6 +4,9 @@
     <Filter Include="TUgine">
       <UniqueIdentifier>{B1C40CD2-9D66-37A8-8621-4BFC7262BEF8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TUgine\Events">
+      <UniqueIdentifier>{751F8218-E1DF-FD4E-AA1A-47CC169A422B}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\TUgine.h" />
@@ -16,9 +19,22 @@
     <ClInclude Include="src\TUgine\EntryPoint.h">
       <Filter>TUgine</Filter>
     </ClInclude>
+    <ClInclude Include="src\TUgine\Events\ApplicationEvent.h">
+      <Filter>TUgine\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TUgine\Events\Event.h">
+      <Filter>TUgine\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TUgine\Events\KeyEvent.h">
+      <Filter>TUgine\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TUgine\Events\MouseEvent.h">
+      <Filter>TUgine\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\TUgine\Log.h">
       <Filter>TUgine</Filter>
     </ClInclude>
+    <ClInclude Include="src\tugpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\TUgine\Application.cpp">
@@ -27,5 +43,6 @@
     <ClCompile Include="src\TUgine\Log.cpp">
       <Filter>TUgine</Filter>
     </ClCompile>
+    <ClCompile Include="src\tugpch.cpp" />
   </ItemGroup>
 </Project>

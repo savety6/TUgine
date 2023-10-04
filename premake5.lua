@@ -18,6 +18,9 @@ project "TUgine"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+    pchheader "tugpch.h"
+    pchsource "TUgine/src/tugpch.cpp"
+
     files
     {
         "%{prj.name}/src/**.h",
@@ -26,6 +29,7 @@ project "TUgine"
 
     includedirs
     {
+        "%{prj.name}/src",
         "%{prj.name}/Submodules/spdlog/include"
     }
 

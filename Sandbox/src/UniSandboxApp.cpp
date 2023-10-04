@@ -1,14 +1,14 @@
 #include <TUgine.h>
 
 
-class USandbox : public TUgine::Application
+class Sandbox : public TUgine::Application
 {
 public:
-	USandbox()
+	Sandbox()
 	{
-		TUG_CORE_INFO("init");
+		//TUG_CORE_INFO("init");
 	}
-	~USandbox()
+	~Sandbox()
 	{
 
 	}
@@ -16,6 +16,6 @@ public:
 
 TUgine::Application* TUgine::CreateApplication()
 {
-	return new USandbox();
+	return new Sandbox();
 }
 
