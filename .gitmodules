@@ -1,3 +1,0 @@
-[submodule "TUgine/Submodules/spdlog"]
-	path = TUgine/Submodules/spdlog
-	url = https://github.com/gabime/spdlog.git
