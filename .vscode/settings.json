@@ -1,0 +1,16 @@
+{
+    "cSpell.words": [
+        "cgltf",
+        "cout",
+        "glfw",
+        "imgui",
+        "MSVC",
+        "opengl",
+        "spdlog",
+        "stbi",
+        "tugine"
+    ],
+    "files.associations": {
+        "xstring": "cpp"
+    }
+}
