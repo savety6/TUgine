@@ -82,7 +82,7 @@ bool Application::Initialize()
     constexpr int windowWidth = 1200;
     constexpr int windowHeight = 900;
 
-    _windowHandle = glfwCreateWindow(windowWidth, windowHeight, "Project Template", nullptr, nullptr);
+    _windowHandle = glfwCreateWindow(windowWidth, windowHeight, "Tugine", nullptr, nullptr);
     if (_windowHandle == nullptr)
     {
         spdlog::error("Glfw: Unable to create window");
@@ -96,6 +96,7 @@ bool Application::Initialize()
 
     glfwMakeContextCurrent(_windowHandle);
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+    
 
     ImGui::CreateContext();
     AfterCreatedUiContext();

@@ -3,8 +3,8 @@ project(TUgine)
 
 add_subdirectory(lib)
 
-set(sourceFiles
-    Application.cpp
+file(GLOB sourceFiles
+    "*.cpp"
 )
 
 add_library(TUgine ${sourceFiles})

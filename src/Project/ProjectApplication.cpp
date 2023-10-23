@@ -310,28 +310,38 @@ bool ProjectApplication::MakeShader(std::string_view vertexShaderFilePath, std::
 
 void ProjectApplication::LoadModel(std::string_view file)
 {
-    // Read GLTF
+    // Initialize options for cgltf and a pointer to hold the model data
     cgltf_options options = {};
     cgltf_data* model = nullptr;
+
+    // Parse the GLTF file and load its buffer data
     cgltf_parse_file(&options, file.data(), &model);
     cgltf_load_buffers(&options, model, file.data());
 
+    // Setup path objects and a map for texture IDs
     fs::path path(file.data());
     const auto basePath = path.parent_path();
     std::unordered_map<std::string, size_t> textureIds;
     _cubes.Textures.reserve(model->materials_count);
     const uint32_t maxBatches = model->materials_count / 16 + 1;
+
+    // Process all materials and load textures
     for (uint32_t i = 0; i < model->materials_count; ++i)
     {
         const auto& material = model->materials[i];
+        // If material has pbr metallic roughness and a base color texture
         if (material.has_pbr_metallic_roughness && material.pbr_metallic_roughness.base_color_texture.texture != nullptr)
         {
             const auto* image = material.pbr_metallic_roughness.base_color_texture.texture->image;
             const auto texturePath = FindTexturePath(basePath, image);
+
+            // Avoid loading the same texture multiple times
             if (textureIds.contains(texturePath))
             {
                 continue;
             }
+
+            // Create and configure a new texture object
             uint32_t texture;
             glCreateTextures(GL_TEXTURE_2D, 1, &texture);
 
@@ -340,25 +350,33 @@ void ProjectApplication::LoadModel(std::string_view file)
             glTextureParameteri(texture, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
             glTextureParameteri(texture, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+            // Load texture data, generate mipmap, and store the texture object
             int32_t width = 0;
             int32_t height = 0;
             int32_t channels = STBI_rgb_alpha;
+
             const auto* textureData = stbi_load(texturePath.c_str(), &width, &height, &channels, STBI_rgb_alpha);
             const auto levels = (uint32_t)std::floor(std::log2(std::max(width, height)));
+            
             glTextureStorage2D(texture, levels, GL_RGBA8, width, height);
             glTextureSubImage2D(texture, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, textureData);
             glGenerateTextureMipmap(texture);
             stbi_image_free((void*)textureData);
             _cubes.Textures.emplace_back(texture);
+
+            // Update the texture IDs map and the texture list
             textureIds[texturePath] = _cubes.Textures.size() - 1;
         }
     }
 
+    // Variables to keep track of the current transform index, vertex offset, and index offset
     uint32_t transformIndex = 0;
     size_t vertexOffset = 0;
     size_t indexOffset = 0;
     std::vector<MeshCreateInfo> meshCreateInfos;
     meshCreateInfos.reserve(1024);
+
+    // Variables to keep track of the current transform index, vertex offset, and index offset
     for (uint32_t i = 0; i < model->scene->nodes_count; ++i)
     {
         std::queue<cgltf_node*> nodes;

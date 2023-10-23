@@ -2,15 +2,24 @@
     "cSpell.words": [
         "cgltf",
         "cout",
+        "GLAD",
         "glfw",
+        "GLsizei",
+        "GLTF",
         "imgui",
+        "mipmap",
         "MSVC",
         "opengl",
+        "Parameteri",
+        "Programiv",
+        "Shaderiv",
         "spdlog",
         "stbi",
         "tugine"
     ],
     "files.associations": {
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "vector": "cpp",
+        "queue": "cpp"
     }
 }
