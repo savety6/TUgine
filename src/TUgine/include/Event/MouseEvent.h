@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace TUgine
 {
     class MouseMovedEvent : public Event

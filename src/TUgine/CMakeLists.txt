@@ -7,7 +7,14 @@ file(GLOB sourceFiles
     "*.cpp"
 )
 
-add_library(TUgine ${sourceFiles})
+file(GLOB headerFiles
+    "**.h"
+    "**.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/Event/*.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/TUgine/*.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/TUgine/*.hpp"
+)
+add_library(TUgine ${sourceFiles} ${headerFiles})
 
 find_package(OpenGL REQUIRED)
 
