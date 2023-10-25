@@ -1,7 +1,7 @@
 #pragma once
 
-#include <TUgine/Application.hpp>
-#include <TUgine/Log.h>
+#include "TUgine/Application.hpp"
+#include "TUgine/Core.hpp"
 #include <glm/mat4x4.hpp>
 #include <glm/vec4.hpp>
 #include <glm/vec3.hpp>

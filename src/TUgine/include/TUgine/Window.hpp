@@ -2,6 +2,7 @@
 
 #include "Event/Event.h"
 #include "GLFW/glfw3.h"
+#include "TUgine/Core.hpp"
 
 namespace TUgine
 {
@@ -36,6 +37,8 @@ namespace TUgine
         void SetEventCallback(const EventCallbackFn &callback);
         void SetVSync(bool enabled);
         bool IsVSync() const;
+
+        static Window *Create(const WindowProps &props = WindowProps());
     private:
         virtual void Init(const WindowProps &props);
         virtual void Shutdown();
