@@ -12,8 +12,6 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/mat4x4.hpp>
 
-#include <spdlog/spdlog.h>
-
 #include <unordered_map>
 #include <filesystem>
 #include <algorithm>
@@ -84,7 +82,7 @@ bool ProjectApplication::Load()
     // Call the base class Load function to initialize the application.
     if (!Application::Load())
     {
-        spdlog::error("App: Unable to load");
+        TUG_ERROR("Failed to load application");
         return false;
     }
 
@@ -264,7 +262,7 @@ bool ProjectApplication::MakeShader(std::string_view vertexShaderFilePath, std::
     if (!success)
     {
         glGetShaderInfoLog(vertexShader, 1024, nullptr, log);
-        spdlog::error(log);
+        TUG_ERROR(log);
         return false;
     }
 
@@ -282,7 +280,7 @@ bool ProjectApplication::MakeShader(std::string_view vertexShaderFilePath, std::
     if (!success)
     {
         glGetShaderInfoLog(fragmentShader, 1024, nullptr, log);
-        spdlog::error(log);
+        TUG_ERROR(log);
         return false;
     }
 
@@ -297,7 +295,7 @@ bool ProjectApplication::MakeShader(std::string_view vertexShaderFilePath, std::
     if (!success)
     {
         glGetProgramInfoLog(_shaderProgram, 1024, nullptr, log);
-        spdlog::error(log);
+        TUG_ERROR(log);
         return false;
     }
 

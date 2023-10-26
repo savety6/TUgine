@@ -1,5 +1,4 @@
 #include "TUgine/Window.hpp"
-
 #include "TUgine/Core.hpp"
 
 namespace TUgine
@@ -29,17 +28,17 @@ namespace TUgine
 
     unsigned int Window::GetWidth() const
     {
-        return m_Data->Width;
+        return m_Data.Width;
     }
 
     unsigned int Window::GetHeight() const
     {
-        return m_Data->Height;
+        return m_Data.Height;
     }
 
     void Window::SetEventCallback(const EventCallbackFn &callback)
     {
-        m_Data->EventCallback = callback;
+        m_Data.EventCallback = callback;
     }
 
     void Window::SetVSync(bool enabled)
@@ -49,20 +48,20 @@ namespace TUgine
         else
             glfwSwapInterval(0);
 
-        m_Data->VSync = enabled;
+        m_Data.VSync = enabled;
     }
 
     bool Window::IsVSync() const
     {
-        return m_Data->VSync;
+        return m_Data.VSync;
     }
 
     void Window::Init(const WindowProps &props)
     {
-        m_Data = std::make_unique<WindowData>();
-        m_Data->Title = props.Title;
-        m_Data->Width = props.Width;
-        m_Data->Height = props.Height;
+        m_Data = WindowData();
+        m_Data.Title = props.Title;
+        m_Data.Width = props.Width;
+        m_Data.Height = props.Height;
 
         TUG_CORE_INFO("Created window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
@@ -73,10 +72,17 @@ namespace TUgine
             s_GLFWInitialized = true;
         }
 
-        m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data->Title.c_str(), nullptr, nullptr);
+        m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
         glfwMakeContextCurrent(m_Window);
         glfwSetWindowUserPointer(m_Window, &m_Data);
         SetVSync(true);
+        glfwWindowHint(GLFW_DECORATED, GLFW_TRUE);
+        glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_API);
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+        glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
     }
 
     void Window::Shutdown()

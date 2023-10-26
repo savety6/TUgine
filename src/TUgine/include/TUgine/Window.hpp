@@ -51,7 +51,7 @@ namespace TUgine
 
             EventCallbackFn EventCallback;
         };
-        std::unique_ptr<WindowData> m_Data;
+        WindowData m_Data;
     };
 
 }
