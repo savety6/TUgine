@@ -78,12 +78,14 @@ namespace TUgine
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
+        // make the window apears in the center of the screen
+        glfwWindowHint(GLFW_CENTER_CURSOR, GLFW_TRUE);
 
         const auto primaryMonitor = glfwGetPrimaryMonitor();
         const auto primaryMonitorVideoMode = glfwGetVideoMode(primaryMonitor);
 
-        constexpr int windowWidth = 1200;
-        constexpr int windowHeight = 900;
+        constexpr int windowWidth = 800;
+        constexpr int windowHeight = 600;
 
         _windowHandle = glfwCreateWindow(windowWidth, windowHeight, "TUgine", nullptr, nullptr);
         if (_windowHandle == nullptr)
@@ -101,10 +103,14 @@ namespace TUgine
         gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
         ImGui::CreateContext();
+        ImGuiIO &io = ImGui::GetIO();
+        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable Docking
         AfterCreatedUiContext();
         ImGui_ImplGlfw_InitForOpenGL(_windowHandle, true);
         ImGui_ImplOpenGL3_Init();
         ImGui::StyleColorsDark();
+
+        TUG_CORE_INFO("Glfw: Initialized and window created, OpenGL version: {}", glGetString(GL_VERSION));
 
         return true;
     }
@@ -115,17 +121,48 @@ namespace TUgine
         glEnable(GL_DEPTH_TEST);
         glDebugMessageCallback([](GLenum source,
                                   GLenum type,
-                                  GLuint,
+                                  GLuint id,
                                   GLenum severity,
-                                  GLsizei,
+                                  GLsizei length,
                                   const GLchar *message,
                                   const void *)
                                {
-        if (type == GL_DEBUG_TYPE_ERROR)
-        {
-            TUG_CORE_ERROR("GL CALLBACK: type = {}, severity = error, message = {}\n", type, message);
-        } },
+            // Convert GLenum parameters to strings
+            std::string _source;
+            std::string _type;
+            std::string _severity;
+
+            switch (source) {
+                case GL_DEBUG_SOURCE_API:             _source = "API"; break;
+                case GL_DEBUG_SOURCE_WINDOW_SYSTEM:   _source = "Window System"; break;
+                case GL_DEBUG_SOURCE_SHADER_COMPILER: _source = "Shader Compiler"; break;
+                case GL_DEBUG_SOURCE_THIRD_PARTY:     _source = "Third Party"; break;
+                case GL_DEBUG_SOURCE_APPLICATION:     _source = "Application"; break;
+                case GL_DEBUG_SOURCE_OTHER:           _source = "Other"; break;
+            }
+
+            switch (type) {
+                case GL_DEBUG_TYPE_ERROR:               _type = "Error"; break;
+                case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR: _type = "Deprecated Behaviour"; break;
+                case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:  _type = "Undefined Behaviour"; break;
+                case GL_DEBUG_TYPE_PORTABILITY:         _type = "Portability"; break;
+                case GL_DEBUG_TYPE_PERFORMANCE:         _type = "Performance"; break;
+                case GL_DEBUG_TYPE_MARKER:              _type = "Marker"; break;
+                case GL_DEBUG_TYPE_PUSH_GROUP:          _type = "Push Group"; break;
+                case GL_DEBUG_TYPE_POP_GROUP:           _type = "Pop Group"; break;
+                case GL_DEBUG_TYPE_OTHER:               _type = "Other"; break;
+            }
+
+            switch (severity) {
+                case GL_DEBUG_SEVERITY_HIGH:         _severity = "high"; break;
+                case GL_DEBUG_SEVERITY_MEDIUM:       _severity = "medium"; break;
+                case GL_DEBUG_SEVERITY_LOW:          _severity = "low"; break;
+                case GL_DEBUG_SEVERITY_NOTIFICATION: _severity = "notification"; break;
+            }
+
+            TUG_CORE_ERROR("GL CALLBACK: source = {}, type = {}, id = {}, severity = {}, message = {}\n", _source, _type, id, _severity, message); },
                                nullptr);
+
         glClearColor(0.05f, 0.02f, 0.07f, 1.0f);
 
         glfwSwapInterval(1);

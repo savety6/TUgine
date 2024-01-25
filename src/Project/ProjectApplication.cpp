@@ -118,7 +118,7 @@ void ProjectApplication::RenderScene([[maybe_unused]] float deltaTime)
     // Create the projection and view matrices using the glm library.
     const auto projection = glm::perspective(glm::radians(80.0f), 1920.0f / 1080.0f, 0.1f, 256.0f);
     const auto view = glm::lookAt(
-        glm::vec3(3 * std::cos(glfwGetTime() / 4), 2, -3 * std::sin(glfwGetTime() / 4)),
+        glm::vec3(3 * std::cos(10 / 4), 2, -3 * std::sin(10 / 4)),
         glm::vec3(0, 0, 0),
         glm::vec3(0, 1, 0));
 
@@ -155,6 +155,7 @@ void ProjectApplication::RenderScene([[maybe_unused]] float deltaTime)
     // Also add the base color texture handle to the textureHandles set for the appropriate batch.
     for (const auto& mesh : _cubes.Meshes)
     {
+        
         const auto index = mesh.BaseColorTexture / 16;
         objectBatches[index].indirectCommands.emplace_back(MeshIndirectInfo
         {
@@ -185,19 +186,43 @@ void ProjectApplication::RenderScene([[maybe_unused]] float deltaTime)
     // Also bind the object data buffer to the shader storage buffer using the glBindBufferBase function.
     for (uint32_t index = 0; const auto& batch : objectBatches)
     {
-        glNamedBufferData(
-            _cubes.ObjectData[index],
-            batch.objects.size() * sizeof(ObjectData),
-            batch.objects.data(),
-            GL_DYNAMIC_DRAW);
+        
+        if (batch.objects.size() > 0) {
+            if (batch.objects.data() != nullptr) {
+                glNamedBufferData(
+                    _cubes.ObjectData[index],
+                    batch.objects.size() * sizeof(ObjectData),
+                    batch.objects.data(),
+                    GL_DYNAMIC_DRAW);
+            } else {
+                TUG_ERROR("batch.objects.data() is null");
+            }
+        } else {
+            TUG_ERROR("Batch is empty");
+        }
+
         glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, _cubes.ObjectData[index]);
 
+        if (batch.indirectCommands.size() > 0) {
+            glNamedBufferData(
+                _cubes.Commands[index],
+                batch.indirectCommands.size() * sizeof(MeshIndirectInfo),
+                batch.indirectCommands.data(),
+                GL_DYNAMIC_DRAW);
+        } else {
+            TUG_ERROR("Batch indirectCommands is empty");
+        }
+
         glBindBuffer(GL_DRAW_INDIRECT_BUFFER, _cubes.Commands[index]);
-        glNamedBufferData(
-            _cubes.Commands[index],
-            batch.indirectCommands.size() * sizeof(MeshIndirectInfo),
-            batch.indirectCommands.data(),
-            GL_DYNAMIC_DRAW);
+
+
+        if (batch.indirectCommands.size() > 0) {
+            glNamedBufferData(
+                _cubes.Commands[index],
+                batch.indirectCommands.size() * sizeof(MeshIndirectInfo),
+                batch.indirectCommands.data(),
+                GL_DYNAMIC_DRAW);
+        }
 
         // Loop through each texture handle in the textureHandles set and set the texture uniforms using the glUniform1i function.
         // Also bind the texture using the glActiveTexture and glBindTexture functions.
